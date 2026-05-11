@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Precision Medicine</title>
+  <title>Nebula Dosing — Precision Pharmacogenomics</title>
   <link href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/app.css" rel="stylesheet">
   <script src="<%=request.getContextPath()%>/static/jquery/jquery-3.4.1.js"></script>
@@ -22,7 +22,17 @@
 
 <nav class="pm-topnav">
   <a class="pm-topnav-brand" href="<%=request.getContextPath()%>/">
-    <span class="brand-dot"></span>Precision Medicine
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="-webkit-text-fill-color:initial;flex-shrink:0;">
+      <circle cx="12" cy="12" r="3" fill="url(#ng)"/>
+      <circle cx="12" cy="12" r="7" stroke="url(#ng)" stroke-width="1.5" fill="none" opacity=".4"/>
+      <circle cx="12" cy="12" r="11" stroke="url(#ng)" stroke-width="1" fill="none" opacity=".2"/>
+      <defs>
+        <linearGradient id="ng" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#60A5FA"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    Nebula Dosing
   </a>
 
   <div class="pm-topnav-links">
