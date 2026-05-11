@@ -13,7 +13,7 @@
            min-height:100vh; padding-top:0; }
     .auth-wrap { width:100%; max-width:420px; padding:1rem; }
     .auth-logo { text-align:center; margin-bottom:2rem; }
-    .auth-logo svg { display:inline-block; margin-right:10px; vertical-align:middle; }
+    .auth-logo svg { display:inline-block; margin-right:8px; vertical-align:middle; }
     .auth-logo span { font-family:var(--font-sans); font-size:1.2rem;
       font-weight:800; background:var(--grad-text);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }

@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Precision Medicine — Nebula Dosing</title>
+  <title>Nebula Dosing — Precision Pharmacogenomics</title>
   <link href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/static/css/app.css" rel="stylesheet">
   <script src="<%=request.getContextPath()%>/static/jquery/jquery-3.4.1.js"></script>
