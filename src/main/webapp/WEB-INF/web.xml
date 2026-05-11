@@ -1,31 +1,35 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  
-  <servlet>
-    <servlet-name>dispatchServlet</servlet-name>
-    <servlet-class>cn.edu.zju.servlet.DispatchServlet</servlet-class>
-    <multipart-config>
-      <file-size-threshold>0</file-size-threshold>
-      <max-file-size>209715200</max-file-size>
-      <max-request-size>209715200</max-request-size>
-    </multipart-config>
-  </servlet>
+    <display-name>Precision Medicine Matching System</display-name>
 
-  <servlet-mapping>
-    <servlet-name>jsp</servlet-name>
-    <url-pattern>/views/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>dispatchServlet</servlet-name>
+        <servlet-class>cn.edu.zju.servlet.DispatchServlet</servlet-class>
+        <multipart-config>
+            <file-size-threshold>0</file-size-threshold>
+            <max-file-size>209715200</max-file-size>      <!-- 200 MB -->
+            <max-request-size>209715200</max-request-size>
+        </multipart-config>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>dispatchServlet</servlet-name>
-    <url-pattern>/*</url-pattern>
-  </servlet-mapping>
+    <!-- Let the container's default JSP servlet handle JSP files -->
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>/views/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Static resources -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Everything else goes through our dispatcher -->
+    <servlet-mapping>
+        <servlet-name>dispatchServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
 </web-app>

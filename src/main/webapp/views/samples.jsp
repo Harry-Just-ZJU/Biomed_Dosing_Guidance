@@ -1,88 +1,38 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hello
-  Date: 2019-12-3
-  Time: 15:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="generator" content="">
-    <title>Dashboard Template · Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <script src="<%=request.getContextPath()%>/static/jquery/jquery-3.4.1.js"></script>
-    <script src="<%=request.getContextPath()%>/static/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom styles for this template -->
-    <link href="<%=request.getContextPath()%>/static/css/app.css" rel="stylesheet">
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Precision Medicine Matching System</a>
-
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <jsp:include page="nav.jsp" >
-            <jsp:param name="active" value="samples" />
-        </jsp:include>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Samples</h2>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Uploaded By</th>
-                        <th>Uploaded At</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${samples}" var="item" varStatus="loop">
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.uploadedBy}</td>
-                            <td>${item.createdAt}</td>
-                            <td><a href="matching?sampleId=${item.id}">matching</a></td>
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
-            </div>
-        </main>
-    </div>
+<jsp:include page="header.jsp"><jsp:param name="activeMenu" value="samples"/></jsp:include>
+<div class="pm-page-header pm-animate d-flex justify-content-between align-items-center flex-wrap">
+  <div><h2>My Reports</h2><p>History of genomic analyses.</p></div>
+  <a href="<%=request.getContextPath()%>/matchingIndex" class="pm-btn pm-btn-teal pm-btn-sm">+ Upload New</a>
 </div>
-</body>
-</html>
+<div class="pm-card pm-animate pm-animate-d1" style="width:100%;">
+  <div style="overflow-x:auto;width:100%;">
+    <table class="pm-table" style="width:100%;">
+      <thead><tr><th>ID</th><th>Patient</th><th>File</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+      <c:forEach items="${samples}" var="item">
+        <tr>
+          <td><span class="pm-diplotype">#${item.id}</span></td>
+          <td style="font-weight:600;">${item.uploadedBy}</td>
+          <td style="font-size:.82rem;color:var(--muted);">
+            <c:choose><c:when test="${not empty item.vcfFilename}">${item.vcfFilename}</c:when>
+            <c:otherwise>—</c:otherwise></c:choose>
+          </td>
+          <td style="color:var(--muted);font-size:.85rem;">${item.createdAt}</td>
+          <td><span class="pm-badge pm-badge-teal">&#10004; Analysed</span></td>
+          <td><a href="<%=request.getContextPath()%>/matching?sampleId=${item.id}"
+                 class="pm-btn pm-btn-outline pm-btn-sm">View</a></td>
+        </tr>
+      </c:forEach>
+      <c:if test="${empty samples}">
+        <tr><td colspan="6" style="text-align:center;padding:3rem;color:var(--muted);">
+          No samples yet. <a href="<%=request.getContextPath()%>/matchingIndex"
+            style="color:var(--teal);">Upload one now.</a>
+        </td></tr>
+      </c:if>
+      </tbody>
+    </table>
+  </div>
+</div>
+<jsp:include page="footer.jsp"/>

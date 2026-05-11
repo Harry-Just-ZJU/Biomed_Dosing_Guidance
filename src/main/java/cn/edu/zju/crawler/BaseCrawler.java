@@ -3,11 +3,10 @@ package cn.edu.zju.crawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public abstract class BaseCrawler {
 
@@ -16,23 +15,21 @@ public abstract class BaseCrawler {
     public String getURLContent(String urlString) {
         try {
             URL url = new URL(urlString);
-            HttpURLConnection urlConnection = ((HttpURLConnection) url.openConnection());
-            urlConnection.setConnectTimeout(60000);
-            urlConnection.setReadTimeout(60000);
-            InputStream inputStream = urlConnection.getInputStream();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int count = inputStream.read(buffer);
-            while (count >= 0) {
-                byteArrayOutputStream.write(buffer, 0, count);
-                count = inputStream.read(buffer);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(60_000);
+            conn.setReadTimeout(60_000);
+            conn.setRequestProperty("User-Agent",
+                    "Mozilla/5.0 (PrecisionMedicine crawler; research use)");
+            try (InputStream in = conn.getInputStream();
+                 ByteArrayOutputStream buf = new ByteArrayOutputStream()) {
+                byte[] buffer = new byte[8192];
+                int n;
+                while ((n = in.read(buffer)) >= 0) buf.write(buffer, 0, n);
+                return buf.toString(StandardCharsets.UTF_8);
             }
-            inputStream.close();
-            return byteArrayOutputStream.toString();
         } catch (IOException e) {
-            log.info("", e);
+            log.warn("Failed to fetch URL {}: {}", urlString, e.getMessage());
         }
         return null;
     }
-
 }

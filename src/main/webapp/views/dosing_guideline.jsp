@@ -1,92 +1,68 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hello
-  Date: 2019-12-3
-  Time: 15:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page isELIgnored="false" %>
+<jsp:include page="header.jsp"><jsp:param name="activeMenu" value="dosing_guideline"/></jsp:include>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="generator" content="">
-    <title>Dashboard Template · Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <script src="<%=request.getContextPath()%>/static/jquery/jquery-3.4.1.js"></script>
-    <script src="<%=request.getContextPath()%>/static/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom styles for this template -->
-    <link href="<%=request.getContextPath()%>/static/css/app.css" rel="stylesheet">
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Precision Medicine Matching System</a>
-
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <jsp:include page="nav.jsp" >
-            <jsp:param name="active" value="dosing_guideline" />
-        </jsp:include>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Dosing Guidelines</h2>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Recommendation</th>
-                        <th>Drug Id</th>
-                        <th>Source</th>
-                        <th>Summary Markdown</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${dosingGuidelines}" var="item">
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.name}</td>
-                            <td>${item.recommendation}</td>
-                            <td>${item.drugId}</td>
-                            <td>${item.source}</td>
-                            <td>${item.summaryMarkdown}</td>
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
-            </div>
-        </main>
-    </div>
+<div class="pm-page-header pm-animate d-flex justify-content-between align-items-end flex-wrap">
+  <div><h2>Dosing Guidelines</h2><p>CPIC / DPWG / FDA pharmacogenomic recommendations.</p></div>
+  <c:if test="${not empty q or not empty param.drugId}">
+    <a href="<%=request.getContextPath()%>/dosingGuideline" class="pm-btn pm-btn-outline pm-btn-sm">Clear</a>
+  </c:if>
 </div>
-</body>
-</html>
+
+<form method="get" action="<%=request.getContextPath()%>/dosingGuideline" class="pm-search-bar pm-animate pm-animate-d1">
+  <input class="pm-search-input" type="text" name="q" value="${fn:escapeXml(q)}"
+         placeholder="Search guidelines by name, source, or summary…">
+  <button type="submit" class="pm-btn pm-btn-teal pm-btn-sm">Search</button>
+</form>
+
+<c:if test="${not empty param.drugId}">
+  <div class="pm-alert pm-alert-info mb-3">
+    <span>&#128269;</span>
+    <span>Filtered for Drug ID: <strong>${param.drugId}</strong></span>
+  </div>
+</c:if>
+
+<div class="pm-card pm-animate pm-animate-d2" style="width:100%;">
+  <div style="overflow-x:auto;width:100%;">
+    <table class="pm-table" style="width:100%;table-layout:fixed;">
+      <colgroup>
+        <col style="width:26%;"><col style="width:13%;">
+        <col style="width:13%;"><col style="width:13%;"><col style="width:27%;"><col style="width:8%;">
+      </colgroup>
+      <thead>
+        <tr><th>Name</th><th>Drug ID</th><th>Source</th><th>Rec.</th><th>Summary</th><th></th></tr>
+      </thead>
+      <tbody>
+      <c:forEach items="${dosingGuidelines}" var="item">
+        <c:if test="${empty param.drugId or param.drugId == item.drugId}">
+          <tr>
+            <td style="font-weight:600;">${item.name}</td>
+            <td><span class="pm-badge pm-badge-navy">${item.drugId}</span></td>
+            <td><span class="pm-badge pm-badge-teal">${item.source}</span></td>
+            <td>
+              <c:choose>
+                <c:when test="${item.recommendation}"><span class="pm-badge pm-badge-teal">Yes</span></c:when>
+                <c:otherwise><span class="pm-badge pm-badge-muted">No</span></c:otherwise>
+              </c:choose>
+            </td>
+            <td style="font-size:.82rem;color:var(--muted);">
+              ${fn:substring(item.summaryMarkdown,0,160)}
+              <c:if test="${fn:length(item.summaryMarkdown)>160}">&hellip;</c:if>
+            </td>
+            <td>
+              <a href="<%=request.getContextPath()%>/dosingGuidelineDetail?id=${item.id}"
+                 class="pm-btn pm-btn-outline pm-btn-sm">View</a>
+            </td>
+          </tr>
+        </c:if>
+      </c:forEach>
+      <c:if test="${empty dosingGuidelines}">
+        <tr><td colspan="6" style="text-align:center;padding:3rem;color:var(--muted);">No guidelines found.</td></tr>
+      </c:if>
+      </tbody>
+    </table>
+  </div>
+</div>
+<jsp:include page="footer.jsp"/>

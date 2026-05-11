@@ -3,47 +3,34 @@ package cn.edu.zju.dbutils;
 import cn.edu.zju.AppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.function.Consumer;
 
 public class DBUtils {
-
     private static final Logger log = LoggerFactory.getLogger(DBUtils.class);
 
     public static Connection getConnection() {
-        Connection connection = null;
-        AppConfig appConfig = AppConfig.getInstance();
+        AppConfig cfg = AppConfig.getInstance();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            log.info("", e);
+            return DriverManager.getConnection(cfg.getJdbcUrl(), cfg.getJdbcUsername(), cfg.getJdbcPassword());
+        } catch (ClassNotFoundException | SQLException e) {
+            log.error("DB connection failed: {}", e.getMessage());
+            throw new RuntimeException("Cannot connect to database: " + e.getMessage(), e);
         }
-        try {
-            connection = DriverManager.getConnection(appConfig.getJdbcUrl()
-                    , appConfig.getJdbcUsername()
-                    , appConfig.getJdbcPassword());
-        } catch (SQLException e) {
-            log.info("", e);
-        }
-        return connection;
     }
 
     public static void execSQL(Consumer<Connection> consumer) {
-        Connection connection = null;
+        Connection conn = null;
         try {
-            connection = getConnection();
-            consumer.accept(connection);
+            conn = getConnection();
+            consumer.accept(conn);
+        } catch (Exception e) {
+            log.error("execSQL failed: {}", e.getMessage(), e);
+            if (e instanceof RuntimeException) throw (RuntimeException) e;
+            throw new RuntimeException(e);
         } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    log.info("", e);
-                }
-            }
+            if (conn != null) try { conn.close(); } catch (SQLException ignored) {}
         }
     }
 }

@@ -1,73 +1,75 @@
 package cn.edu.zju.dao;
 
-import cn.edu.zju.bean.Drug;
 import cn.edu.zju.bean.DrugLabel;
 import cn.edu.zju.dbutils.DBUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class DrugLabelDao extends BaseDao {
-
     private static final Logger log = LoggerFactory.getLogger(DrugLabelDao.class);
 
-    public boolean existsById(String id) {
-        return super.existsById(id, "drug_label");
-    }
+    public boolean existsById(String id) { return super.existsById(id, "drug_label"); }
 
-    public void saveDrugLabel(DrugLabel drugLabel) {
-        DBUtils.execSQL(connection -> {
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement("insert into drug_label (id,name,obj_cls,alternate_drug_available,dosing_information,prescribing_markdown,source,text_markdown,summary_markdown,raw,drug_id) values (?,?,?,?,?,?,?,?,?,?,?)");
-                preparedStatement.setString(1, drugLabel.getId());
-                preparedStatement.setString(2, drugLabel.getName());
-                preparedStatement.setString(3, drugLabel.getObjCls());
-                preparedStatement.setBoolean(4, drugLabel.isAlternateDrugAvailable());
-                preparedStatement.setBoolean(5, drugLabel.isDosingInformation());
-                preparedStatement.setString(6, drugLabel.getPrescribingMarkdown());
-                preparedStatement.setString(7, drugLabel.getSource());
-                preparedStatement.setString(8, drugLabel.getTextMarkdown());
-                preparedStatement.setString(9, drugLabel.getSummaryMarkdown());
-                preparedStatement.setString(10, drugLabel.getRaw());
-                preparedStatement.setString(11, drugLabel.getDrugId());
-                preparedStatement.execute();
-            } catch (SQLException e) {
-                log.info("", e);
-            }
+    public void saveDrugLabel(DrugLabel dl) {
+        if (existsById(dl.getId())) return;
+        DBUtils.execSQL(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO drug_label (id,name,obj_cls,alternate_drug_available," +
+                    "dosing_information,prescribing_markdown,source,text_markdown," +
+                    "summary_markdown,raw,drug_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
+                ps.setString(1, dl.getId()); ps.setString(2, dl.getName());
+                ps.setString(3, dl.getObjCls()); ps.setBoolean(4, dl.isAlternateDrugAvailable());
+                ps.setBoolean(5, dl.isDosingInformation()); ps.setString(6, dl.getPrescribingMarkdown());
+                ps.setString(7, dl.getSource()); ps.setString(8, dl.getTextMarkdown());
+                ps.setString(9, dl.getSummaryMarkdown()); ps.setString(10, dl.getRaw());
+                ps.setString(11, dl.getDrugId()); ps.execute();
+            } catch (SQLException e) { log.error("saveDrugLabel id={}", dl.getId(), e); }
         });
-
     }
 
     public List<DrugLabel> findAll() {
-        List<DrugLabel> drugLabels = new ArrayList<>();
-        DBUtils.execSQL(connection -> {
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement("select id, name, obj_cls, alternate_drug_available, dosing_information, prescribing_markdown, source, text_markdown, summary_markdown, raw, drug_id from drug_label");
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    String id = resultSet.getString("id");
-                    String name = resultSet.getString("name");
-                    String obj_cls = resultSet.getString("obj_cls");
-                    boolean alternate_drug_available = resultSet.getBoolean("alternate_drug_available");
-                    boolean dosing_information = resultSet.getBoolean("dosing_information");
-                    String prescribing_markdown = resultSet.getString("prescribing_markdown");
-                    String source = resultSet.getString("source");
-                    String text_markdown = resultSet.getString("text_markdown");
-                    String summary_markdown = resultSet.getString("summary_markdown");
-                    String raw = resultSet.getString("raw");
-                    String drug_id = resultSet.getString("drug_id");
-                    DrugLabel drugLabel = new DrugLabel(id, name, obj_cls, alternate_drug_available, dosing_information, prescribing_markdown, source, text_markdown, summary_markdown, raw, drug_id);
-                    drugLabels.add(drugLabel);
-                }
-            } catch (SQLException e) {
-                log.info("", e);
-            }
+        List<DrugLabel> list = new ArrayList<>();
+        DBUtils.execSQL(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT id,name,obj_cls,alternate_drug_available,dosing_information," +
+                    "prescribing_markdown,source,text_markdown,summary_markdown,raw,drug_id " +
+                    "FROM drug_label ORDER BY name");
+                 ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) list.add(new DrugLabel(
+                        rs.getString("id"), rs.getString("name"), rs.getString("obj_cls"),
+                        rs.getBoolean("alternate_drug_available"), rs.getBoolean("dosing_information"),
+                        rs.getString("prescribing_markdown"), rs.getString("source"),
+                        rs.getString("text_markdown"), rs.getString("summary_markdown"),
+                        rs.getString("raw"), rs.getString("drug_id")));
+            } catch (SQLException e) { log.error("findAll drugLabels", e); }
         });
-        return drugLabels;
+        return list;
+    }
+    public DrugLabel findById(String id) {
+        if (id == null) return null;
+        java.util.concurrent.atomic.AtomicReference<DrugLabel> ref = new java.util.concurrent.atomic.AtomicReference<>();
+        DBUtils.execSQL(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT id,name,obj_cls,alternate_drug_available,dosing_information,prescribing_markdown,source,text_markdown,summary_markdown,raw,drug_id FROM drug_label WHERE id=?")) {
+                ps.setString(1, id);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) ref.set(new DrugLabel(rs.getString("id"),rs.getString("name"),rs.getString("obj_cls"),rs.getBoolean("alternate_drug_available"),rs.getBoolean("dosing_information"),rs.getString("prescribing_markdown"),rs.getString("source"),rs.getString("text_markdown"),rs.getString("summary_markdown"),rs.getString("raw"),rs.getString("drug_id")));
+                }
+            } catch (SQLException e) { log.error("findById label", e); }
+        });
+        return ref.get();
+    }
+    public java.util.List<DrugLabel> findByDrugId(String drugId) {
+        java.util.List<DrugLabel> list = new java.util.ArrayList<>();
+        DBUtils.execSQL(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT id,name,obj_cls,alternate_drug_available,dosing_information,prescribing_markdown,source,text_markdown,summary_markdown,raw,drug_id FROM drug_label WHERE drug_id=? ORDER BY name")) {
+                ps.setString(1, drugId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) list.add(new DrugLabel(rs.getString("id"),rs.getString("name"),rs.getString("obj_cls"),rs.getBoolean("alternate_drug_available"),rs.getBoolean("dosing_information"),rs.getString("prescribing_markdown"),rs.getString("source"),rs.getString("text_markdown"),rs.getString("summary_markdown"),rs.getString("raw"),rs.getString("drug_id")));
+                }
+            } catch (SQLException e) { log.error("findByDrugId label", e); }
+        });
+        return list;
     }
 }
