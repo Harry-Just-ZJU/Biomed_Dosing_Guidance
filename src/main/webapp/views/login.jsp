@@ -13,21 +13,32 @@
            min-height:100vh; padding-top:0; }
     .auth-wrap { width:100%; max-width:420px; padding:1rem; }
     .auth-logo { text-align:center; margin-bottom:2rem; }
-    .auth-logo .brand-dot { display:inline-block; width:12px; height:12px;
-      background:var(--teal); border-radius:50%; margin-right:8px; }
-    .auth-logo span { font-family:var(--font-sans); font-size:1.15rem;
-      font-weight:700; color:var(--navy); }
-    .auth-card { background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-md); }
-    .auth-card h2 { font-size:1.5rem; margin-bottom:.25rem; }
+    .auth-logo svg { display:inline-block; margin-right:10px; vertical-align:middle; }
+    .auth-logo span { font-family:var(--font-sans); font-size:1.2rem;
+      font-weight:800; background:var(--grad-text);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .auth-card { background:var(--bg-card);
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-lg); }
+    .auth-card h2 { font-size:1.5rem; margin-bottom:.25rem; color:var(--text); font-weight:800; }
     .auth-card p.sub { color:var(--muted); font-size:.88rem; margin-bottom:1.75rem; }
   </style>
 </head>
 <body>
 <div class="auth-wrap pm-animate">
   <div class="auth-logo">
-    <span class="brand-dot"></span>
-    <span>Precision Medicine</span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px;">
+      <circle cx="12" cy="12" r="3" fill="url(#lg)"/>
+      <circle cx="12" cy="12" r="7" stroke="url(#lg)" stroke-width="1.5" fill="none" opacity=".5"/>
+      <circle cx="12" cy="12" r="11" stroke="url(#lg)" stroke-width="1" fill="none" opacity=".25"/>
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#60A5FA"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>Nebula Dosing</span>
   </div>
 
   <div class="auth-card">
@@ -65,7 +76,7 @@
     <p style="text-align:center;margin-top:1.5rem;font-size:.85rem;color:var(--muted);">
       Don't have an account?
       <a href="<%=request.getContextPath()%>/register"
-         style="color:var(--teal);font-weight:600;">Create one</a>
+         style="color:var(--purple-light);font-weight:600;">Create one</a>
     </p>
   </div>
 </div>

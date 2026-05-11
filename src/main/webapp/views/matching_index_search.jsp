@@ -209,11 +209,11 @@
               <div style="font-size:.78rem;color:var(--muted);">Contraindicated</div>
             </div>
             <div style="text-align:center;">
-              <div style="font-size:2rem;font-weight:700;color:#92600A;">${wCount}</div>
+              <div style="font-size:2rem;font-weight:700;color:var(--yellow);">${wCount}</div>
               <div style="font-size:.78rem;color:var(--muted);">Dose Adjustment</div>
             </div>
             <div style="text-align:center;">
-              <div style="font-size:2rem;font-weight:700;color:#2E7D32;">${sCount}</div>
+              <div style="font-size:2rem;font-weight:700;color:var(--green);">${sCount}</div>
               <div style="font-size:.78rem;color:var(--muted);">Standard</div>
             </div>
             <div style="text-align:center;">

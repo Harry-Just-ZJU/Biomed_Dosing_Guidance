@@ -61,28 +61,28 @@
     <div class="row">
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon" style="background:#E0F2F1;">&#128274;</div>
+          <div class="pm-feature-icon">&#128274;</div>
           <h5>Secure &amp; Private</h5>
           <p>Your genomic data is processed locally and never shared without explicit consent.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon" style="background:#EEF2F7;">&#128200;</div>
+          <div class="pm-feature-icon">&#128200;</div>
           <h5>Dual Format Support</h5>
           <p>Accepts both standard VCF files and pre-annotated ANNOVAR table outputs.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon" style="background:#E8F5E9;">&#9889;</div>
+          <div class="pm-feature-icon">&#9889;</div>
           <h5>CPIC Standard</h5>
           <p>Haplotype inference across 12 major pharmacogenes using published CPIC A &amp; B guidelines.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon" style="background:#FFFBEA;">&#128218;</div>
+          <div class="pm-feature-icon">&#128218;</div>
           <h5>Evidence-Based</h5>
           <p>Guidelines from CPIC, DPWG, and PharmGKB — the gold standard in pharmacogenomics.</p>
         </div>
