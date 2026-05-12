@@ -86,10 +86,10 @@
         <c:if test="${not empty drug.drugUrl}">
           <div>
             <div style="color:var(--muted);font-size:.75rem;text-transform:uppercase;font-weight:600;">PharmGKB Link</div>
-             <a href="https://www.pharmgkb.org${drug.drugUrl}" target="_blank"
-                style="color:var(--teal);font-size:.82rem;">
-               View on PharmGKB <svg class="pm-icon"><use href="#pm-icon-arrow-right"/></svg>
-             </a>
+            <a href="https://www.pharmgkb.org${drug.drugUrl}" target="_blank"
+               style="color:var(--teal);font-size:.82rem;">
+              View on PharmGKB <svg class="pm-icon"><use href="#pm-icon-arrow-right"/></svg>
+            </a>
           </div>
         </c:if>
       </div>
