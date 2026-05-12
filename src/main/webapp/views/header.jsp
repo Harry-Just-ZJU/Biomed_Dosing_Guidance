@@ -62,10 +62,6 @@
   <symbol id="pm-icon-layers" viewBox="0 0 24 24">
     <path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/>
   </symbol>
-  <symbol id="pm-icon-book-open" viewBox="0 0 24 24">
-    <path d="M2 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2z"/>
-    <path d="M22 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>
-  </symbol>
   <symbol id="pm-icon-arrow-right" viewBox="0 0 24 24">
     <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
   </symbol>

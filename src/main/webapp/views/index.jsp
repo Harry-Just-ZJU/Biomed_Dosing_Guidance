@@ -82,7 +82,7 @@
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-book-open"/></svg></div>
+          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-guide"/></svg></div>
           <h5>Evidence-Based</h5>
           <p>Guidelines from CPIC, DPWG, and PharmGKB — the gold standard in pharmacogenomics.</p>
         </div>
