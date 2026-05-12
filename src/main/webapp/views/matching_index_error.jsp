@@ -22,18 +22,18 @@
         <c:choose>
           <c:when test="${fn:contains(validateError,'Database') or fn:contains(validateError,'database')}">
             <div class="pm-alert pm-alert-danger mb-3">
-              <span>&#9940;</span>
+              <span><svg class="pm-icon"><use href="#pm-icon-ban"/></svg></span>
               <div><strong>Database Error</strong><br><small>${validateError}</small></div>
             </div>
             <div class="pm-alert pm-alert-warning text-left" style="font-size:.83rem;">
-              <span>&#128161;</span>
+              <span><svg class="pm-icon"><use href="#pm-icon-lightbulb"/></svg></span>
               <div><strong>Fix:</strong> Ensure MySQL is running, database <code>biomed</code> exists,
               and run <code>migrate.sql</code> + <code>migrate_users.sql</code>.</div>
             </div>
           </c:when>
           <c:otherwise>
             <div class="pm-alert pm-alert-danger mb-3">
-              <span>&#9940;</span>
+              <span><svg class="pm-icon"><use href="#pm-icon-ban"/></svg></span>
               <div><strong>Processing Error</strong><br><small>${validateError}</small></div>
             </div>
           </c:otherwise>

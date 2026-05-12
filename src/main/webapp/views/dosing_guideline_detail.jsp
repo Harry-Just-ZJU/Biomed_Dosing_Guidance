@@ -5,7 +5,9 @@
 <jsp:include page="header.jsp"><jsp:param name="activeMenu" value="dosing_guideline"/></jsp:include>
 <div class="pm-page-header pm-animate">
   <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
-    <a href="<%=request.getContextPath()%>/dosingGuideline" class="pm-btn pm-btn-outline pm-btn-sm">&#8592; Back</a>
+    <a href="<%=request.getContextPath()%>/dosingGuideline" class="pm-btn pm-btn-outline pm-btn-sm">
+      <svg class="pm-icon"><use href="#pm-icon-arrow-left"/></svg> Back
+    </a>
     <h2 style="margin:0;">${guideline.name}</h2>
     <span class="pm-badge pm-badge-teal">${guideline.source}</span>
     <c:if test="${guideline.recommendation}">

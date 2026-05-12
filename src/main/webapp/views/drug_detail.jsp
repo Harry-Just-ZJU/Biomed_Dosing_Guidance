@@ -7,7 +7,7 @@
 <div class="pm-page-header pm-animate">
   <div style="display:flex;align-items:center;gap:.75rem;">
     <a href="<%=request.getContextPath()%>/drugs" class="pm-btn pm-btn-outline pm-btn-sm">
-      &#8592; Back
+      <svg class="pm-icon"><use href="#pm-icon-arrow-left"/></svg> Back
     </a>
     <h2 style="margin:0;">${drug.name}</h2>
     <c:if test="${drug.biomarker}">
@@ -21,7 +21,7 @@
   <div class="col-md-8">
     <!-- Drug Labels -->
     <div class="pm-detail-section pm-animate pm-animate-d1">
-      <h3>&#127991;&#65039; Drug Labels (${fn:length(labels)})</h3>
+      <h3><svg class="pm-icon"><use href="#pm-icon-tag"/></svg> Drug Labels (${fn:length(labels)})</h3>
       <c:if test="${empty labels}">
         <p style="color:var(--muted);">No labels found for this drug.</p>
       </c:if>
@@ -46,7 +46,7 @@
 
     <!-- Dosing Guidelines -->
     <div class="pm-detail-section pm-animate pm-animate-d2">
-      <h3>&#128218; Dosing Guidelines (${fn:length(guidelines)})</h3>
+      <h3><svg class="pm-icon"><use href="#pm-icon-book"/></svg> Dosing Guidelines (${fn:length(guidelines)})</h3>
       <c:if test="${empty guidelines}">
         <p style="color:var(--muted);">No guidelines found for this drug.</p>
       </c:if>
@@ -86,8 +86,10 @@
         <c:if test="${not empty drug.drugUrl}">
           <div>
             <div style="color:var(--muted);font-size:.75rem;text-transform:uppercase;font-weight:600;">PharmGKB Link</div>
-            <a href="https://www.pharmgkb.org${drug.drugUrl}" target="_blank"
-               style="color:var(--teal);font-size:.82rem;">View on PharmGKB &#8594;</a>
+             <a href="https://www.pharmgkb.org${drug.drugUrl}" target="_blank"
+                style="color:var(--teal);font-size:.82rem;">
+               View on PharmGKB <svg class="pm-icon"><use href="#pm-icon-arrow-right"/></svg>
+             </a>
           </div>
         </c:if>
       </div>

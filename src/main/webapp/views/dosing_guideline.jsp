@@ -18,10 +18,10 @@
 </form>
 
 <c:if test="${not empty param.drugId}">
-  <div class="pm-alert pm-alert-info mb-3">
-    <span>&#128269;</span>
-    <span>Filtered for Drug ID: <strong>${param.drugId}</strong></span>
-  </div>
+    <div class="pm-alert pm-alert-info mb-3">
+      <span><svg class="pm-icon"><use href="#pm-icon-search"/></svg></span>
+      <span>Filtered for Drug ID: <strong>${param.drugId}</strong></span>
+    </div>
 </c:if>
 
 <div class="pm-card pm-animate pm-animate-d2" style="width:100%;">

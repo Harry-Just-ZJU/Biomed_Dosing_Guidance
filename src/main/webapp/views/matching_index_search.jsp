@@ -34,7 +34,7 @@
 <!-- History rerun notice -->
 <c:if test="${rerunMode}">
   <div class="pm-alert pm-alert-info pm-animate mb-4">
-    <span>&#8505;&#65039;</span>
+    <span><svg class="pm-icon"><use href="#pm-icon-info"/></svg></span>
     <div>
       <strong>History View</strong> — Full haplotype report available immediately after upload.
       Re-upload the VCF to regenerate.
@@ -113,7 +113,9 @@
   <c:if test="${empty genoCalls}">
     <div class="pm-card pm-animate mb-4">
       <div class="pm-card-body text-center" style="padding:3rem;">
-        <div style="font-size:2.5rem;margin-bottom:1rem;">&#129516;</div>
+        <div style="font-size:2.5rem;margin-bottom:1rem;">
+          <svg class="pm-icon pm-icon-xl"><use href="#pm-icon-dna"/></svg>
+        </div>
         <h4 style="font-family:var(--font-sans);font-weight:700;">No Pharmacogenomic Variants Detected</h4>
         <p style="color:var(--muted);max-width:480px;margin:.75rem auto 1.5rem;">
           None of the variants matched known pharmacogenomic rsIDs in the CPIC star-allele database.
@@ -154,9 +156,9 @@
               <td>
                 <span class="pm-risk-tag ${gc.riskLevel}">
                   <c:choose>
-                    <c:when test="${gc.riskLevel == 'danger'}">&#9940;</c:when>
-                    <c:when test="${gc.riskLevel == 'warning'}">&#9888;&#65039;</c:when>
-                    <c:otherwise>&#10004;</c:otherwise>
+                    <c:when test="${gc.riskLevel == 'danger'}"><svg class="pm-icon"><use href="#pm-icon-ban"/></svg></c:when>
+                    <c:when test="${gc.riskLevel == 'warning'}"><svg class="pm-icon"><use href="#pm-icon-alert"/></svg></c:when>
+                    <c:otherwise><svg class="pm-icon"><use href="#pm-icon-check"/></svg></c:otherwise>
                   </c:choose>
                   ${gc.phenotype}
                 </span>
@@ -185,9 +187,9 @@
 
     <!-- Legend -->
     <div class="d-flex flex-wrap mb-4 pm-animate pm-animate-d2" style="gap:.5rem;">
-      <span class="pm-risk-tag danger">&#9940; Contraindicated / Avoid</span>
-      <span class="pm-risk-tag warning">&#9888;&#65039; Dose Adjustment Required</span>
-      <span class="pm-risk-tag success">&#10004; Standard Guidance</span>
+      <span class="pm-risk-tag danger"><svg class="pm-icon"><use href="#pm-icon-ban"/></svg> Contraindicated / Avoid</span>
+      <span class="pm-risk-tag warning"><svg class="pm-icon"><use href="#pm-icon-alert"/></svg> Dose Adjustment Required</span>
+      <span class="pm-risk-tag success"><svg class="pm-icon"><use href="#pm-icon-check"/></svg> Standard Guidance</span>
     </div>
 
     <!-- Summary chart -->
@@ -227,7 +229,7 @@
 
     <c:if test="${empty recommendations}">
       <div class="pm-alert pm-alert-info pm-animate">
-        <span>&#8505;&#65039;</span>
+        <span><svg class="pm-icon"><use href="#pm-icon-info"/></svg></span>
         <span>Phenotypes were called but no CPIC drug recommendations apply to these phenotypes.</span>
       </div>
     </c:if>
@@ -239,7 +241,7 @@
           <div class="pm-drug-card-top ${rec.riskLevel}"></div>
           <div class="pm-drug-card-body">
             <div class="d-flex justify-content-between align-items-start mb-2">
-              <p class="pm-drug-name">&#128138; ${rec.drugName}</p>
+              <p class="pm-drug-name"><svg class="pm-icon"><use href="#pm-icon-pill"/></svg> ${rec.drugName}</p>
               <span class="pm-cpic-badge">CPIC ${rec.cpicLevel}</span>
             </div>
             <div class="mb-2" style="font-size:.8rem;">
@@ -256,7 +258,7 @@
 
     <!-- Safety disclaimer -->
     <div class="pm-alert pm-alert-warning mt-2" style="font-size:.82rem;">
-      <span>&#9888;&#65039;</span>
+      <span><svg class="pm-icon"><use href="#pm-icon-alert"/></svg></span>
       <span>
         <strong>Clinical Disclaimer:</strong> This report is for research and educational purposes only.
         It does not constitute medical advice. All dosing decisions must be made by a qualified clinician.

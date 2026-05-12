@@ -17,12 +17,12 @@
   <button type="submit" class="pm-btn pm-btn-teal pm-btn-sm">Search</button>
 </form>
 
-<c:if test="${not empty param.drugId}">
-  <div class="pm-alert pm-alert-info mb-3">
-    <span>&#128269;</span>
-    <span>Filtered for Drug ID: <strong>${param.drugId}</strong></span>
-  </div>
-</c:if>
+  <c:if test="${not empty param.drugId}">
+    <div class="pm-alert pm-alert-info mb-3">
+      <span><svg class="pm-icon"><use href="#pm-icon-search"/></svg></span>
+      <span>Filtered for Drug ID: <strong>${param.drugId}</strong></span>
+    </div>
+  </c:if>
 
 <div class="pm-card pm-animate pm-animate-d2" style="width:100%;">
   <div style="overflow-x:auto;width:100%;">

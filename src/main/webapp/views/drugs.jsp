@@ -17,12 +17,12 @@
   <button type="submit" class="pm-btn pm-btn-teal pm-btn-sm">Search</button>
 </form>
 
-<c:if test="${not empty q}">
-  <div class="pm-alert pm-alert-info mb-3">
-    <span>&#128269;</span>
-    <span>${fn:length(drugs)} result(s) for "<strong>${fn:escapeXml(q)}</strong>"</span>
-  </div>
-</c:if>
+  <c:if test="${not empty q}">
+    <div class="pm-alert pm-alert-info mb-3">
+      <span><svg class="pm-icon"><use href="#pm-icon-search"/></svg></span>
+      <span>${fn:length(drugs)} result(s) for "<strong>${fn:escapeXml(q)}</strong>"</span>
+    </div>
+  </c:if>
 
 <div class="pm-card pm-animate pm-animate-d2" style="width:100%;">
   <div style="overflow-x:auto;width:100%;">
