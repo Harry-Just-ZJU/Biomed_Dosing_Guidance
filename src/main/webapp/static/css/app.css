@@ -514,7 +514,12 @@ select:focus-visible{
 }
 
 @media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  html:focus-within{scroll-behavior:auto;}
+  .pm-animate,.pm-animate-d1,.pm-animate-d2,.pm-animate-d3{animation:none !important;}
+  .pm-btn,.pm-btn-hero-primary,.pm-btn-hero-outline,
+  .pm-nav-btn,.pm-nav-item,
+  .pm-card,.pm-feature-card,.pm-drug-card,.pm-dropzone,
+  .pm-input,.pm-search-input{transition:none;}
 }
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
