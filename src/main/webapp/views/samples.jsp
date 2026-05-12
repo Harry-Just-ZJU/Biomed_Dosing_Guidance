@@ -20,7 +20,7 @@
             <c:otherwise>—</c:otherwise></c:choose>
           </td>
           <td style="color:var(--muted);font-size:.85rem;">${item.createdAt}</td>
-          <td><span class="pm-badge pm-badge-teal">&#10004; Analysed</span></td>
+          <td><span class="pm-badge pm-badge-teal"><svg class="pm-icon"><use href="#pm-icon-check"/></svg> Analysed</span></td>
           <td><a href="<%=request.getContextPath()%>/matching?sampleId=${item.id}"
                  class="pm-btn pm-btn-outline pm-btn-sm">View</a></td>
         </tr>

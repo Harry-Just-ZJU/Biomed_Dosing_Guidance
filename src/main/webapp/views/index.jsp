@@ -10,11 +10,11 @@
      recommendations powered by the CPIC pharmacogenomics standard.</p>
   <div class="pm-hero-actions">
     <a href="<%=request.getContextPath()%>/matchingIndex" class="pm-btn-hero-primary">
-      Upload Genomic Data &#8594;
+      Upload Genomic Data <svg class="pm-icon"><use href="#pm-icon-arrow-right"/></svg>
     </a>
     <a href="<%=request.getContextPath()%>/static/pdf/user_guide.pdf"
        target="_blank" class="pm-btn-hero-outline">
-      &#128196; Download User Guide
+      <svg class="pm-icon"><use href="#pm-icon-guide"/></svg> Download User Guide
     </a>
   </div>
 </div>
@@ -61,28 +61,28 @@
     <div class="row">
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon">&#128274;</div>
+          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-lock"/></svg></div>
           <h5>Secure &amp; Private</h5>
           <p>Your genomic data is processed locally and never shared without explicit consent.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon">&#128200;</div>
+          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-layers"/></svg></div>
           <h5>Dual Format Support</h5>
           <p>Accepts both standard VCF files and pre-annotated ANNOVAR table outputs.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon">&#9889;</div>
+          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-spark"/></svg></div>
           <h5>CPIC Standard</h5>
           <p>Haplotype inference across 12 major pharmacogenes using published CPIC A &amp; B guidelines.</p>
         </div>
       </div>
       <div class="col-6 mb-3">
         <div class="pm-feature-card">
-          <div class="pm-feature-icon">&#128218;</div>
+          <div class="pm-feature-icon"><svg class="pm-icon"><use href="#pm-icon-guide"/></svg></div>
           <h5>Evidence-Based</h5>
           <p>Guidelines from CPIC, DPWG, and PharmGKB — the gold standard in pharmacogenomics.</p>
         </div>

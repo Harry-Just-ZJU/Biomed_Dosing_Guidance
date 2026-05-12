@@ -29,13 +29,9 @@
           </h6>
 
           <div class="pm-dropzone" id="drop-zone">
-            <div class="pm-dropzone-icon">
-              <svg width="22" height="22" fill="none" stroke="var(--teal)"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-              </svg>
-            </div>
+          <div class="pm-dropzone-icon">
+            <svg class="pm-icon"><use href="#pm-icon-upload"/></svg>
+          </div>
             <h6>Drag &amp; drop your file here</h6>
             <p>.vcf / .vcf.gz &nbsp;&bull;&nbsp; .txt / .tsv (ANNOVAR table) &nbsp;&bull;&nbsp; max 200 MB</p>
             <input type="file" id="file-input" name="vcfFile" style="display:none"
