@@ -14,6 +14,7 @@
   --primary-light:#C4B5FD;
   --accent:#F97316;
   --accent-light:#FDBA74;
+  --accent-hover:#FB923C;
   --accent-glow:rgba(249,115,22,.25);
   /* semantic keep-compat aliases */
   --teal:var(--accent);
@@ -52,9 +53,9 @@
   --focus-ring:0 0 0 3px rgba(249,115,22,.3);
   --transition:all 0.2s ease;
   --nav-h:70px;
-  --icon-md:16px;
-  --icon-lg:22px;
-  --icon-xl:40px;
+  --icon-md:1.05em;
+  --icon-lg:1.5em;
+  --icon-xl:2.6em;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -68,7 +69,6 @@ body {
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
   margin:0;padding-top:var(--nav-h);
-  color-scheme:dark;
   background-image:
     radial-gradient(circle at 12% 8%,rgba(124,58,237,.18) 0%,transparent 40%),
     radial-gradient(circle at 88% -6%,rgba(249,115,22,.16) 0%,transparent 42%),
@@ -216,7 +216,7 @@ select:focus-visible{
 .pm-btn-primary{background:var(--grad-primary);color:#fff;box-shadow:var(--shadow-sm);}
 .pm-btn-primary:hover{color:#fff;transform:translateY(-1px);filter:brightness(1.05);}
 .pm-btn-teal{background:var(--accent);color:var(--bg);box-shadow:var(--shadow-sm);}
-.pm-btn-teal:hover{color:var(--bg);transform:translateY(-1px);background:#FB923C;}
+.pm-btn-teal:hover{color:var(--bg);transform:translateY(-1px);background:var(--accent-hover);}
 .pm-btn-outline{
   background:transparent;color:var(--text);
   border:1.5px solid var(--border-strong);
