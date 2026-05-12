@@ -514,7 +514,6 @@ select:focus-visible{
 }
 
 @media (prefers-reduced-motion: reduce){
-  html:focus-within{scroll-behavior:auto;}
   .pm-animate,.pm-animate-d1,.pm-animate-d2,.pm-animate-d3{animation:none !important;}
   .pm-btn,.pm-btn-hero-primary,.pm-btn-hero-outline,
   .pm-nav-btn,.pm-nav-item,
